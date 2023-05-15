@@ -12,7 +12,7 @@ const conexion = db.createConnection({
   host: "localhost",
   database: "notasdetexto",
   user: "root",
-  password: "",
+  password: "1234",
 });
 
 conexion.connect(function (error) {
@@ -29,7 +29,8 @@ const User = {
   email: "VARCHAR(255) NOT NULL",
   password: "VARCHAR(255) NOT NULL",
   createdAt: "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
-  updatedAt: "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+  updatedAt:
+    "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
 };
 
 // Modelo de datos para las notas
@@ -42,7 +43,8 @@ const Note = {
   public: "BOOLEAN NOT NULL DEFAULT FALSE",
   image: "VARCHAR(255)",
   createdAt: "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
-  updatedAt: "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+  updatedAt:
+    "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
 };
 
 // Rutas de autenticación
@@ -51,20 +53,23 @@ app.post("/api/register", async (req, res) => {
 
   // Validar que se hayan proporcionado email y contraseña
   if (!email || !password) {
-    return res.status(400).json({ success: false, message: "Email y contraseña son requeridos" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Email y contraseña son requeridos" });
   }
 
   try {
-// Verificar si el usuario ya existe en la base de datos
-const user = await db.query("SELECT * FROM users WHERE email = ?", [email]);
+    // Verificar si el usuario ya existe en la base de datos
+    const user = await db.query("SELECT * FROM users WHERE email = ?", [email]);
 
-if (user.length) {
-  return res.status(409).json({ success: false, message: "Este email ya ha sido registrado" });
-}
+    if (user.length) {
+      return res
+        .status(409)
+        .json({ success: false, message: "Este email ya ha sido registrado" });
+    }
 
-// Generar un hash de la contraseña
-const hash = await bcrypt.hash(password, 10);
-
+    // Generar un hash de la contraseña
+    const hash = await bcrypt.hash(password, 10);
 
     // Insertar el usuario en la base de datos
     await db.query("INSERT INTO users (email, password) VALUES (?, ?)", [
@@ -98,7 +103,6 @@ app.post("/api/login", async (req, res) => {
     }
 
     //
-
 
     // Generar un token de acceso
     const token = jwt.sign({ userId: user[0].id }, "secreto");
