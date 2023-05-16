@@ -7,6 +7,14 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
+
+app.listen(3000, () => {
+  console.log("server running on port", 3000);
+});
+
 // Conexion con mysql
 const conexion = db.createConnection({
   host: "localhost",
