@@ -19,7 +19,7 @@ npm install
 Asegúrate de proporcionar la información correcta para la conexión a tu base de datos MySQL.
 
 Inicia la aplicación ejecutando el siguiente comando:
-node index.js
+npm start en la raiz del directorio
 
 La aplicación estará disponible en http://localhost:3000.
 
