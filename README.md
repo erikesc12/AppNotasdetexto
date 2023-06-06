@@ -15,13 +15,7 @@ Abre una terminal y navega hasta el directorio raíz del proyecto.
 Ejecuta el siguiente comando para instalar las dependencias:
 npm install
 
-Configura la conexión a la base de datos MySQL modificando el archivo index.js:
-const conexion = db.createConnection({
-  host: "localhost",
-  database: "notasdetexto",
-  user: "root",
-  password: "1234",
-});
+
 Asegúrate de proporcionar la información correcta para la conexión a tu base de datos MySQL.
 
 Inicia la aplicación ejecutando el siguiente comando:
