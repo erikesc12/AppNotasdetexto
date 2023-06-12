@@ -14,8 +14,16 @@ app.use('/', routes);
 app.use(middlewares.handleError);
 
 // Inicio del servidor
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
-app.listen(5000, () => {
-  console.log(`Servidor iniciado en el puerto 5000`);
+app.listen(3000, () => {
+  console.log(`Servidor iniciado en el puerto 3000`);
 });
+
+const registerUserNoAuth = (req, res) => {
+  const { username, password } = req.body;
+
+  // Validar los datos recibidos
+  if (!username || !password) {
+    return res.status(400).json({ error: 'Se requiere un nombre de usuario y una contraseña.' });
+  }
