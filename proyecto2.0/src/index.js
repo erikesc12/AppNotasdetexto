@@ -27,3 +27,4 @@ const registerUserNoAuth = (req, res) => {
   if (!username || !password) {
     return res.status(400).json({ error: 'Se requiere un nombre de usuario y una contraseña.' });
   }
+}
