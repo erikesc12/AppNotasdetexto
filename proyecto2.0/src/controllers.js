@@ -4,30 +4,28 @@ const db = require('./db');
 
 // Controlador para el registro de usuarios
 const registerUser = async (req, res) => {
-    try {
-      const { email, password } = req.body;
-  
-      // Verifica si el usuario ya está registrado
-      const existingUser = await db.getUserByEmail(email);
-      if (existingUser) {
-        return res.status(400).json({ error: 'El usuario ya está registrado.' });
-      }
-  
-      // Cifra la contraseña antes de guardarla en la base de datos
-      const hashedPassword = await bcrypt.hash(password, 10);
-  
-      // Crea un nuevo usuario en la base de datos
-      const newUser = await db.createUser(email, hashedPassword);
-  
-      // Retorna la respuesta con el usuario creado
-      return res.status(201).json({ user: newUser });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Error interno del servidor.' });
-    }
-  };
-  
+  try {
+    const { email, password } = req.body;
 
+    // Verifica si el usuario ya está registrado
+    const existingUser = await db.getUserByEmail(email);
+    if (existingUser) {
+      return res.status(400).json({ error: 'El usuario ya está registrado.' });
+    }
+
+    // Cifra la contraseña antes de guardarla en la base de datos
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Crea un nuevo usuario en la base de datos
+    const newUser = await db.createUser(email, hashedPassword);
+
+    // Retorna la respuesta con el usuario creado
+    return res.status(201).json({ user: newUser });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Error interno del servidor.' });
+  }
+};
 // Controlador para el inicio de sesión de usuarios
 const loginUser = async (req, res) => {
   try {

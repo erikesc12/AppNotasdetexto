@@ -16,7 +16,7 @@ router.post('/generate-token', (req, res) => {
   res.json({ token }); // Devolver el token generado en la respuesta
 });
 
-router.post('/register', controllers.registerUser);
+router.post('/register',authenticateUser, controllers.registerUser);
 router.post('/login', controllers.loginUser);
 router.post('/notes', authenticateUser, controllers.createNote);
 router.get('/notes', authenticateUser, controllers.getNotes);

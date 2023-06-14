@@ -38,8 +38,10 @@ const comparePassword = async (password, hashedPassword) => {
 
 const authenticateUser = (req, res, next) => {
   const token = req.headers.authorization;
+
   if (req.path === '/register') {
     return next();
+  }
 
   if (!token) {
     return res.status(401).json({ error: 'No se proporcionó un token de acceso.' });
@@ -71,4 +73,4 @@ module.exports = {
   comparePassword,
   authenticateUser,
   handleError,
-};
+}
