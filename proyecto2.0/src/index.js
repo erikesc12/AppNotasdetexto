@@ -14,10 +14,10 @@ app.use('/', routes);
 app.use(middlewares.handleError);
 
 // Inicio del servidor
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3006;
 
-app.listen(3000, () => {
-  console.log(`Servidor iniciado en el puerto 3000`);
+app.listen(3006, () => {
+  console.log(`Servidor iniciado en el puerto 3006`);
 });
 
 const registerUserNoAuth = (req, res) => {
